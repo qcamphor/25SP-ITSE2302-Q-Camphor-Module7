@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Text Here</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img
+          src="images/Logo1_copy_25.jpg"
+          alt="T-Shirt Shop Logo"
+          width="226"
+          height="170" />
+      </div>
+      <!-- Search bar -->
+      <form class="search-bar" action="#" method="get">
+        <input
+          type="text"
+          name="search"
+          placeholder="Search..."
+          aria-label="Search"
+          required />
+        <button type="submit">Search</button>
+      </form>
+
+      <!-- navigation -->
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Custom Design</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Design Folder</a></li>
+        </ul>
+      </nav>
+
+      <!-- header buttons -->
+      <div class="header-buttons">
+        <button class="header-btn" aria-label="Profile">
+          <img src="images/profileicon.png" alt="Profile" />
+        </button>
+        <button class="header-btn" aria-label="Favorites">
+          <img src="images/favicon.png" alt="Favorites" />
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <h2 class="gradient-banner">Featured items picked for you</h2>
+
+      <!-- featured products section -->
+      <section class="featured-products">
+        <div class="product-box">
+          <img
+            src="images/pop_pics.jpg"
+            alt="Featured T-Shirt 1"
+            width="150"
+            height="150" />
+          <h3>Single Black T-Shirt</h3>
+          <p>A timeless design.</p>
+          <button
+            class="add-to-cart"
+            data-product="Single Black T-Shirt"
+            data-price="15"
+            aria-label="Add Single Black T-Shirt to Cart">
+            Add to Cart
+          </button>
+        </div>
+        <div class="product-box">
+          <img
+            src="images/pop_pics3.jpg"
+            alt="Featured T-Shirt 2"
+            width="150"
+            height="150" />
+          <h3>Two T-Shirt Bundle</h3>
+          <p>Design a new look.</p>
+          <button
+            class="add-to-cart"
+            data-product="Two T-Shirt Bundle"
+            data-price="30"
+            aria-label="Add Two T-Shirt Bundle to Cart">
+            Add to Cart
+          </button>
+        </div>
+        <div class="product-box">
+          <img
+            src="images/pop_pics2.jpg"
+            alt="Featured T-Shirt 3"
+            width="150"
+            height="150" />
+          <h3>Three T-Shirt Bundle</h3>
+          <p>Create your own unique styles.</p>
+          <button
+            class="add-to-cart"
+            data-product="Three T-Shirt Bundle"
+            data-price="45"
+            aria-label="Add Three T-Shirt Bundle to Cart">
+            Add to Cart
+          </button>
+        </div>
+      </section>
+
+      <h2 class="gradient-banner">Place Your Order</h2>
+      <section class="form-section">
+        <h2>Order Form</h2>
+        <form id="orderForm">
+          <!-- Text Inputs -->
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required />
+
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" required />
+
+          <!-- Email Input -->
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <!-- Radio Buttons -->
+          <fieldset>
+            <legend>Select T-Shirt Size:</legend>
+            <label>
+              <input type="radio" name="size" value="5" required /> Small ($5)
+            </label>
+            <label>
+              <input type="radio" name="size" value="10" required /> Medium
+              ($10)
+            </label>
+            <label>
+              <input type="radio" name="size" value="15" required /> Large ($15)
+            </label>
+            <label>
+              <input type="radio" name="size" value="20" required /> X-Large
+              ($20)
+            </label>
+          </fieldset>
+
+          <!-- Checkboxes -->
+          <fieldset>
+            <legend>Add Extras:</legend>
+            <label>
+              <input type="checkbox" name="extras" value="5" /> Pocket Design
+              ($5)
+            </label>
+            <label>
+              <input type="checkbox" name="extras" value="10" /> Custom Logo
+              ($10)
+            </label>
+            <label>
+              <input type="checkbox" name="extras" value="8" /> Gift Wrapping
+              ($8)
+            </label>
+            <label>
+              <input type="checkbox" name="extras" value="12" /> Personalized
+              Message ($12)
+            </label>
+          </fieldset>
+
+          <!-- Color Picker -->
+          <label for="color">Choose T-Shirt Color:</label>
+          <input type="color" id="color" name="color" value="#ffffff" />
+
+          <!-- Number Input -->
+          <label for="quantity">Quantity:</label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="1"
+            value="1"
+            required />
+
+          <!-- Submit and Reset Buttons -->
+          <button type="button" id="addToCartButton">Add to Cart</button>
+          <button type="reset">Reset</button>
+        </form>
+      </section>
+      <!-- Cart Section -->
+      <section id="cart" class="cart-section" aria-live="polite">
+        <h2>Your Cart</h2>
+        <table id="cartTable">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+          </tbody>
+        </table>
+        <p id="cartTotal" class="cart-total">Total: $0</p>
+        <button id="checkoutButton" class="checkout-btn">Checkout</button>
+      </section>
+
+      <section class="testimonials">
+        <h2 class="gradient-banner">Customer Testimonials</h2>
+        <div class="testimonial-container">
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "Customer service is quick and efficient. Your Text Here has a
+              loyal customer in me!"
+            </p>
+            <p class="customer-name">- Mary D.</p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "I always get good quality clothes from Your Text Here and I never
+              have to wait long for my order."
+            </p>
+            <p class="customer-name">- Jenny S.</p>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "If you're looking for clothing with good materials, you've found
+              it! I recommend Your Text Here to all my friends."
+            </p>
+            <p class="customer-name">- Kerry J.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <section class="info-section">
+      <div class="info-box">
+        <h2>About Us</h2>
+        <p>
+          "Your Text Here is the leading provider of high-quality t-shirts. Our
+          goal is to help individuals express their unique style through custom
+          apparel. We offer a wide range of designs, colors, and sizes to suit
+          every taste and preference.
+        </p>
+        <p>
+          Whether you're looking for a classic t-shirt, a trendy cropped style,
+          or a custom design, we have something for everyone. Our team is
+          dedicated to providing exceptional customer service and ensuring that
+          you find the perfect t-shirt for any occasion."
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Your Text Here | All rights reserved.</p>
+      <div class="logo">
+        <img
+          src="images/Logo1_copy_25.jpg"
+          alt="T-Shirt Shop Logo"
+          width="226"
+          height="170" />
+      </div>
+    </footer>
+
+    <script src="javascript/javascript.js" defer></script>
+  </body>
+</html>
