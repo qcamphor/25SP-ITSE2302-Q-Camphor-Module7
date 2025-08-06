@@ -1,148 +1,175 @@
-// Store cart data
-let cart = []; // Array
-let cartTotal = 0;
+// Constant
+const submitBtn = document.getElementById("submitButton");
+const resetBtn = document.getElementById("resetButton");
+const cartSection = document.getElementById("cart");
 
-// "Add to Cart" button in the form
-document
-  .getElementById("addToCartButton")
-  .addEventListener("click", function () {
-    // Get form data
-    const firstName = document.getElementById("firstName").value; // String Methods
-    const lastName = document.getElementById("lastName").value;
-    const email = document.getElementById("email").value;
-    const size = document.querySelector('input[name="size"]:checked'); // Constant
-    const extras = Array.from(
-      document.querySelectorAll('input[name="extras"]:checked')
-    ).map((extra) => Number(extra.value)); // Array
-    const color = document.getElementById("color").value;
-    const quantity = Number(document.getElementById("quantity").value);
+// Event Listener
+submitBtn.addEventListener("click", handleOrder);
+resetBtn.addEventListener("click", resetOrder);
 
-    // Validate required fields
-    if (!firstName || !lastName || !email || !size || quantity <= 0) {
-      // If and Else
-      alert("Please fill out all required fields.");
-      return;
-    }
-
-    // Calculate the total price
-    const basePrice = Number(size.value);
-    const extrasTotal = extras.reduce((sum, price) => sum + price, 0); // Loop
-    const totalPrice = calculateTotal(basePrice, extrasTotal, quantity);
-
-    // Add the product to the cart
-    addToCart({
-      name: `${size.parentElement.textContent.trim()} T-Shirt`,
-      price: basePrice + extrasTotal,
-      quantity: quantity,
-      color: color,
-      totalPrice: totalPrice,
-    });
-
-    // Show a confirmation alert
-    alert("Your item has been added to the cart!");
-
-    // Display a message in the message container
-    const messageContainer = document.getElementById("messageContainer");
-    messageContainer.textContent = "Your item has been added to the cart!";
-    messageContainer.style.display = "block";
-  });
-
-// "Add to Cart" buttons in the featured products section
-const addToCartButtons = document.querySelectorAll(".add-to-cart"); // Constant
-addToCartButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    const productName = button.getAttribute("data-product"); // String Methods
-    const productPrice = Number(button.getAttribute("data-price"));
-
-    // Add the product to the cart
-    addToCart({
-      name: productName,
-      price: productPrice,
-      quantity: 1,
-      totalPrice: productPrice,
-    });
-
-    // Show a confirmation alert
-    alert(`${productName} has been added to your cart!`);
-  });
-});
-
-// Function to calculate the total price
-function calculateTotal(basePrice, extrasTotal, quantity) {
-  return (basePrice + extrasTotal) * quantity;
-}
-
-// Function to add an item to the cart
-function addToCart(item) {
-  if (!item.price) {
-    console.error("Item price is missing. Cannot add to cart.");
-    return;
+// Function with argument and returns value
+function calculateTotal(checkboxes, radio, quantity) {
+  var total = 0;
+  for (var i = 0; i < checkboxes.length; i++) {
+    var price = parseFloat(checkboxes[i].value.split("-")[1]);
+    total += price;
   }
-  cart.push(item);
-  cartTotal += item.totalPrice;
-  updateCartDisplay();
+  if (radio) {
+    var radioPrice = parseFloat(radio.value.split("-")[1]);
+    total += radioPrice;
+  }
+  total = total * quantity;
+  return total;
 }
 
-// Function to update the cart display
-function updateCartDisplay() {
-  const cartItemsContainer = document.getElementById("cartItems");
-  const cartTotalContainer = document.getElementById("cartTotal");
+// Order function
+function handleOrder() {
+  var firstName = document.querySelector('input[name="firstName"]')
+    ? document.querySelector('input[name="firstName"]').value.trim()
+    : "";
+  var lastName = document.querySelector('input[name="lastName"]')
+    ? document.querySelector('input[name="lastName"]').value.trim()
+    : "";
+  var email = document.querySelector('input[name="email"]')
+    ? document.querySelector('input[name="email"]').value.trim()
+    : "";
+  var phone = document.querySelector('input[name="phone"]')
+    ? document.querySelector('input[name="phone"]').value.trim()
+    : "";
+  var quantity = parseInt(document.getElementById("quantity").value);
 
-  // Clear the current cart display
-  cartItemsContainer.innerHTML = "";
+  // Array chceks radio and checkboxes
+  var checkboxes = [];
+  var checkboxCircle = document.querySelectorAll(
+    'input[type="checkbox"][name="printColor"]'
+  );
+  for (var i = 0; i < checkboxCircle.length; i++) {
+    if (checkboxCircle[i].checked) {
+      checkboxes.push(checkboxCircle[i]);
+    }
+  }
 
-  // Loop through the cart and display each item
-  cart.forEach((item, index) => {
-    const row = document.createElement("tr");
+  var radios = [];
+  var radioCircle = document.querySelectorAll(
+    'input[type="radio"][name="size"]'
+  );
+  for (var j = 0; j < radioCircle.length; j++) {
+    if (radioCircle[j].checked) {
+      radios.push(radioCircle[j]);
+    }
+  }
 
-    // Item Name
-    const nameCell = document.createElement("td");
-    nameCell.textContent = item.name || "Unknown Item";
-    row.appendChild(nameCell);
+  // Print colors
+  var printColors = "";
+  for (i = 0; i < checkboxes.length; i++) {
+    if (i > 0) printColors += ", ";
+    printColors += checkboxes[i].parentElement.textContent.trim();
+  }
 
-    // Item Price
-    const priceCell = document.createElement("td");
-    priceCell.textContent = `$${item.price.toFixed(2)}`;
-    row.appendChild(priceCell);
+  // If and Else, Boolean for info
+  var valid = true;
 
-    // Item Quantity
-    const quantityCell = document.createElement("td");
-    quantityCell.textContent = item.quantity || 1;
-    row.appendChild(quantityCell);
+  if (!firstName) {
+    alert("Please enter your first name.");
+    valid = false;
+  } else if (!lastName) {
+    alert("Please enter your last name.");
+    valid = false;
+  } else if (!email || !email.includes("@")) {
+    alert("Please enter a valid email address.");
+    valid = false;
+  } else if (!phone) {
+    alert("Please enter your phone number.");
+    valid = false;
+  } else if (checkboxes.length === 0) {
+    alert("Please select at least one style/color.");
+    valid = false;
+  } else if (radios.length === 0) {
+    alert("Please select a size.");
+    valid = false;
+  } else if (isNaN(quantity) || quantity < 1) {
+    alert("Please enter a valid quantity.");
+    valid = false;
+  }
 
-    // Item Total
-    const totalCell = document.createElement("td");
-    totalCell.textContent = `$${item.totalPrice.toFixed(2)}`;
-    row.appendChild(totalCell);
+  if (!valid) return;
 
-    // Remove Button
-    const removeCell = document.createElement("td");
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-    removeButton.classList.add("remove-btn");
-    removeButton.addEventListener("click", () => removeFromCart(index));
-    removeCell.appendChild(removeButton);
-    row.appendChild(removeCell);
+  // Switch for sizes
+  var sizeLabel = "";
+  switch (radios[0].value.split("-")[0]) {
+    case "S":
+      sizeLabel = "Small";
+      break;
+    case "M":
+      sizeLabel = "Medium";
+      break;
+    case "L":
+      sizeLabel = "Large";
+      break;
+    case "XL":
+      sizeLabel = "X-Large";
+      break;
+    case "2XL":
+      sizeLabel = "2X-Large";
+      break;
+    case "3XL":
+      sizeLabel = "3X-Large";
+      break;
+    case "4XL":
+      sizeLabel = "4X-Large";
+      break;
+    default:
+      sizeLabel = "Other";
+  }
 
-    cartItemsContainer.appendChild(row);
-  });
+  // Get selected style and price
+  var styleSelect = document.getElementById("style");
+  var selectedStyleOption = styleSelect.options[styleSelect.selectedIndex];
+  var styleName = selectedStyleOption.textContent;
+  var stylePrice = selectedStyleOption.getAttribute("data-price");
 
-  // Update the total price display
-  cartTotalContainer.textContent = `Total: $${cartTotal.toFixed(2)}`;
+  // Calculate total
+  var total = calculateTotal(checkboxes, radios[0], quantity);
+
+  // Calculate shirt cost (shirt price * quantity)
+  var shirtCost = stylePrice * quantity;
+
+  // Order summary
+  var summary = `
+    <h2>Order Summary</h2>
+    <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Phone:</strong> ${phone}</p>
+    <p><strong>Shirt Style:</strong> ${styleName}</p>
+    <p><strong>Quantity:</strong> ${quantity}</p>
+    <p><strong>Size:</strong> ${sizeLabel}</p>
+    <p><strong>Print Colors:</strong> ${printColors}</p>
+    <p><strong>Total Price:</strong> $${shirtCost.toFixed(2)}</p>
+    <button id="checkoutButton" type="button">Checkout</button>
+  `;
+  cartSection.innerHTML = summary;
+
+  // Show popup when checkout button is clicked
+  var checkoutBtn = document.getElementById("checkoutButton");
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", function () {
+      alert("Thank you for your order! Your checkout is being processed.");
+    });
+  }
 }
 
-// Function to remove an item from the cart
-function removeFromCart(index) {
-  const item = cart[index];
-  cartTotal -= item.totalPrice;
-  cart.splice(index, 1);
-  updateCartDisplay();
-}
+// Function, Try/Catch
+function resetOrder() {
+  try {
+    // Reset all forms by their IDs
+    document.getElementById("contactForm").reset();
+    document.getElementById("orderForm").reset();
+    document.getElementById("extrasForm").reset();
+    document.getElementById("colorForm").reset();
 
-// Add a reset event listener to the form
-document.getElementById("orderForm").addEventListener("reset", function () {
-  cart = [];
-  cartTotal = 0;
-  updateCartDisplay();
-  alert("The form has been reset.");
-});
+    // Clear the cart summary
+    cartSection.innerHTML = "";
+  } catch (err) {
+    alert("Could not reset the order summary.");
+  }
+}
