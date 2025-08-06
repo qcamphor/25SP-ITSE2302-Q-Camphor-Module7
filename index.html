@@ -3,184 +3,209 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title -->
     <title>Your Text Here</title>
+
+    <!-- Fonts -->
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap"
+      rel="stylesheet" />
   </head>
   <body>
     <header>
+      <!-- Logo -->
       <div class="logo">
-        <img
-          src="images/Logo1_copy_25.jpg"
-          alt="T-Shirt Shop Logo"
-          width="226"
-          height="170" />
+        <a href="index.html">
+          <img
+            src="images/tshirtshop_logo.png"
+            alt="T-Shirt Shop Logo"
+            width="200"
+            height="170" />
+        </a>
       </div>
-      <!-- Search bar -->
-      <form class="search-bar" action="#" method="get">
-        <input
-          type="text"
-          name="search"
-          placeholder="Search..."
-          aria-label="Search"
-          required />
-        <button type="submit">Search</button>
-      </form>
 
-      <!-- navigation -->
-      <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Shop</a></li>
-          <li><a href="#">Custom Design</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Design Folder</a></li>
-        </ul>
-      </nav>
+      <!-- Search bar -->
+      <div class="header-center">
+        <form class="search-bar" action="#" method="get">
+          <input type="text" name="search" placeholder="Search..." />
+          <button type="submit">Search</button>
+        </form>
+
+        <!-- navigation -->
+        <nav>
+          <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="custom.html">Custom</a></li>
+            <li><a href="saved.html">Saved</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
 
       <!-- header buttons -->
       <div class="header-buttons">
-        <button class="header-btn" aria-label="Profile">
-          <img src="images/profileicon.png" alt="Profile" />
-        </button>
-        <button class="header-btn" aria-label="Favorites">
-          <img src="images/favicon.png" alt="Favorites" />
-        </button>
+        <button type="button" class="head-btn" aria-label="Login">Login</button>
       </div>
     </header>
 
     <main>
-      <h2 class="gradient-banner">Featured items picked for you</h2>
+      <div id="intro-banner" class="intro-banner">
+        <h1 id="banner-h1">Create custom designs</h1>
+        <img
+          src="images/banner-shirts.png"
+          alt="The front of a white and black t-shirt."
+          width="200"
+          height="170" />
 
-      <!-- featured products section -->
-      <section class="featured-products">
-        <div class="product-box">
-          <img
-            src="images/pop_pics.jpg"
-            alt="Featured T-Shirt 1"
-            width="150"
-            height="150" />
-          <h3>Single Black T-Shirt</h3>
-          <p>A timeless design.</p>
-          <button
-            class="add-to-cart"
-            data-product="Single Black T-Shirt"
-            data-price="15"
-            aria-label="Add Single Black T-Shirt to Cart">
-            Add to Cart
-          </button>
+        <div class="intro-banner-text">
+          <h2>TSTC Campus Styles</h2>
+          <p>Browse and create custom prints online.</p>
+          <p>Show your campus pride or display your unique style.</p>
         </div>
-        <div class="product-box">
-          <img
-            src="images/pop_pics3.jpg"
-            alt="Featured T-Shirt 2"
-            width="150"
-            height="150" />
-          <h3>Two T-Shirt Bundle</h3>
-          <p>Design a new look.</p>
-          <button
-            class="add-to-cart"
-            data-product="Two T-Shirt Bundle"
-            data-price="30"
-            aria-label="Add Two T-Shirt Bundle to Cart">
-            Add to Cart
-          </button>
-        </div>
-        <div class="product-box">
-          <img
-            src="images/pop_pics2.jpg"
-            alt="Featured T-Shirt 3"
-            width="150"
-            height="150" />
-          <h3>Three T-Shirt Bundle</h3>
-          <p>Create your own unique styles.</p>
-          <button
-            class="add-to-cart"
-            data-product="Three T-Shirt Bundle"
-            data-price="45"
-            aria-label="Add Three T-Shirt Bundle to Cart">
-            Add to Cart
-          </button>
-        </div>
-      </section>
 
-      <h2 class="gradient-banner">Place Your Order</h2>
-      <section class="form-section">
+        <div class="intro-banner-text">
+          <h2>Custom Styles</h2>
+          <p>All styles are available to both the student and staff.</p>
+          <p>Keep custom designs appropriate and respectful.</p>
+        </div>
+        <a href="custom.html" class="design-btn">Start Designing</a>
+      </div>
+
+      <!-- Product Images -->
+
+      <img
+        class="banner-img"
+        src="images/bannerImg.png"
+        alt="Images of T shirts" />
+
+      <!-- Order form -->
+      <section class="order-section">
         <h2>Order Form</h2>
-        <form id="orderForm">
-          <!-- Text Inputs -->
-          <label for="firstName">First Name:</label>
-          <input type="text" id="firstName" name="firstName" required />
+        <div class="order-forms-row">
+          <form id="contactForm" class="order-form-box">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required />
 
-          <label for="lastName">Last Name:</label>
-          <input type="text" id="lastName" name="lastName" required />
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required />
 
-          <!-- Email Input -->
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
 
-          <!-- Radio Buttons -->
-          <fieldset>
-            <legend>Select T-Shirt Size:</legend>
-            <label>
-              <input type="radio" name="size" value="5" required /> Small ($5)
-            </label>
-            <label>
-              <input type="radio" name="size" value="10" required /> Medium
-              ($10)
-            </label>
-            <label>
-              <input type="radio" name="size" value="15" required /> Large ($15)
-            </label>
-            <label>
-              <input type="radio" name="size" value="20" required /> X-Large
-              ($20)
-            </label>
-          </fieldset>
+            <label for="phone">Phone Number:</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              placeholder="123-456-7890"
+              required />
+          </form>
 
-          <!-- Checkboxes -->
-          <fieldset>
-            <legend>Add Extras:</legend>
-            <label>
-              <input type="checkbox" name="extras" value="5" /> Pocket Design
-              ($5)
-            </label>
-            <label>
-              <input type="checkbox" name="extras" value="10" /> Custom Logo
-              ($10)
-            </label>
-            <label>
-              <input type="checkbox" name="extras" value="8" /> Gift Wrapping
-              ($8)
-            </label>
-            <label>
-              <input type="checkbox" name="extras" value="12" /> Personalized
-              Message ($12)
-            </label>
-          </fieldset>
+          <form id="orderForm" class="order-form-box">
+            <label for="style">Select T-Shirt Style:</label>
+            <select id="style" name="style" required>
+              <option value="" disabled selected>Select a style</option>
+              <option value="crewneck" data-price="10">Crew Neck ($10)</option>
+              <option value="vneck" data-price="12">V-Neck ($12)</option>
+              <option value="longsleeve" data-price="15">
+                Long Sleeve ($15)
+              </option>
+              <option value="hoodie" data-price="20">Hoodie ($20)</option>
+              <option value="tanktop" data-price="8">Tank Top ($8)</option>
+              <option value="baseball" data-price="18">
+                Baseball Tee ($18)
+              </option>
+              <option value="crop" data-price="14">Crop Top ($14)</option>
+              <option value="pocket" data-price="16">Pocket Tee ($16)</option>
+              <option value="raglan" data-price="19">Raglan Tee ($19)</option>
+              <option value="scoopneck" data-price="13">
+                Scoop Neck ($13)
+              </option>
+            </select>
+          </form>
 
-          <!-- Color Picker -->
-          <label for="color">Choose T-Shirt Color:</label>
-          <input type="color" id="color" name="color" value="#ffffff" />
+          <form id="colorForm" class="order-form-box">
+            <p>Choose a print color:</p>
+            <label
+              ><input type="checkbox" name="printColor" value="black-2" />
+              Black</label
+            >
+            <label
+              ><input type="checkbox" name="printColor" value="white-3" />
+              White</label
+            >
+            <label
+              ><input type="checkbox" name="printColor" value="red-4" />
+              Red</label
+            >
+            <label
+              ><input type="checkbox" name="printColor" value="blue-5" />
+              Blue</label
+            >
+            <label
+              ><input type="checkbox" name="printColor" value="green-6" />
+              Green</label
+            >
+            <label
+              ><input type="checkbox" name="printColor" value="yellow-7" />
+              Yellow</label
+            >
+          </form>
 
-          <!-- Number Input -->
-          <label for="quantity">Quantity:</label>
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            min="1"
-            value="1"
-            required />
+          <form id="extrasForm" class="order-form-box">
+            <p>Choose a size:</p>
+            <label
+              ><input type="radio" name="size" value="S-2" required />
+              Small</label
+            >
+            <label
+              ><input type="radio" name="size" value="M-3" required />
+              Medium</label
+            >
+            <label
+              ><input type="radio" name="size" value="L-4" required />
+              Large</label
+            >
+            <label
+              ><input type="radio" name="size" value="XL-5" required />
+              X-Large</label
+            >
+            <label
+              ><input type="radio" name="size" value="2XL-6" required />
+              2X-Large</label
+            >
+            <label
+              ><input type="radio" name="size" value="3XL-7" required />
+              3X-Large</label
+            >
+            <label
+              ><input type="radio" name="size" value="4XL-8" required />
+              4X-Large</label
+            >
 
-          <!-- Submit and Reset Buttons -->
-          <button type="button" id="addToCartButton">Add to Cart</button>
-          <button type="reset">Reset</button>
-        </form>
+            <label for="quantity">Quantity:</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="1"
+              value="1"
+              required />
+          </form>
+        </div>
+        <div class="order-section-buttons">
+          <button type="button" id="submitButton">Submit</button>
+          <button type="reset" id="resetButton">Reset</button>
+        </div>
       </section>
       <!-- Cart Section -->
-      <section id="cart" class="cart-section" aria-live="polite">
+      <section id="cart" class="cart-section">
         <h2>Your Cart</h2>
         <table id="cartTable">
           <thead>
@@ -192,19 +217,22 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody id="cartItems">
-            <!-- Cart items will be dynamically added here -->
-          </tbody>
+          <tbody id="cartItems"></tbody>
         </table>
         <p id="cartTotal" class="cart-total">Total: $0</p>
-        <button id="checkoutButton" class="checkout-btn">Checkout</button>
+        <button type="button" id="checkoutButton" class="checkout-btn">
+          Checkout
+        </button>
       </section>
 
+      <!-- Testimonials Section -->
       <section class="testimonials">
-        <h2 class="gradient-banner">Customer Testimonials</h2>
+        <h2>Customer Testimonials</h2>
+
         <div class="testimonial-container">
           <!-- Testimonial 1 -->
           <div class="testimonial-card">
+            <h3>"Quick and efficient"</h3>
             <p class="testimonial-text">
               "Customer service is quick and efficient. Your Text Here has a
               loyal customer in me!"
@@ -214,6 +242,7 @@
 
           <!-- Testimonial 2 -->
           <div class="testimonial-card">
+            <h3>"Great quality and fast delivery"</h3>
             <p class="testimonial-text">
               "I always get good quality clothes from Your Text Here and I never
               have to wait long for my order."
@@ -223,6 +252,7 @@
 
           <!-- Testimonial 3 -->
           <div class="testimonial-card">
+            <h3>"Great customer service"</h3>
             <p class="testimonial-text">
               "If you're looking for clothing with good materials, you've found
               it! I recommend Your Text Here to all my friends."
@@ -231,33 +261,41 @@
           </div>
         </div>
       </section>
-    </main>
-    <section class="info-section">
-      <div class="info-box">
-        <h2>About Us</h2>
+
+      <section class="about-us">
+        <h2>The Team</h2>
         <p>
-          "Your Text Here is the leading provider of high-quality t-shirts. Our
-          goal is to help individuals express their unique style through custom
-          apparel. We offer a wide range of designs, colors, and sizes to suit
-          every taste and preference.
-        </p>
-        <p>
-          Whether you're looking for a classic t-shirt, a trendy cropped style,
-          or a custom design, we have something for everyone. Our team is
+          “Your Text Here is the leading provider of high-quality t-shirts at
+          TSTC. Our goal is to help our students and staff express their unique
+          style through custom apparel. We offer a wide range of designs,
+          colors, and sizes to suit every taste and preference. Our team is
           dedicated to providing exceptional customer service and ensuring that
           you find the perfect t-shirt for any occasion."
         </p>
-      </div>
-    </section>
+      </section>
+    </main>
 
+    <!-- Footer -->
     <footer>
-      <p>&copy; 2025 Your Text Here | All rights reserved.</p>
+      <!-- Social links -->
+      <div class="social-links">
+        <p id="socialP">Follow us on:</p>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener"
+          >Facebook</a
+        >
+        <a href="https://www.twitter.com" target="_blank" rel="noopener"
+          >Twitter</a
+        >
+      </div>
+      <!-- Copyright -->
+      <p class="footer-copyright">
+        &copy; 2025 Your Text Here | All rights reserved.
+      </p>
+      <!-- Logo -->
       <div class="logo">
-        <img
-          src="images/Logo1_copy_25.jpg"
-          alt="T-Shirt Shop Logo"
-          width="226"
-          height="170" />
+        <a href="index.html">
+          <img src="images/tshirtshop_logo.png" alt="T-Shirt Shop Logo" />
+        </a>
       </div>
     </footer>
 
