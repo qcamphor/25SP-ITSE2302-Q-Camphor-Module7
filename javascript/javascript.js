@@ -38,7 +38,7 @@ function handleOrder() {
     : "";
   var quantity = parseInt(document.getElementById("quantity").value);
 
-  // Array chceks radio and checkboxes
+  // Array checks radio and checkboxes
   var checkboxes = [];
   var checkboxCircle = document.querySelectorAll(
     'input[type="checkbox"][name="printColor"]'
@@ -126,50 +126,104 @@ function handleOrder() {
   var styleSelect = document.getElementById("style");
   var selectedStyleOption = styleSelect.options[styleSelect.selectedIndex];
   var styleName = selectedStyleOption.textContent;
-  var stylePrice = selectedStyleOption.getAttribute("data-price");
+  var stylePrice =
+    parseFloat(selectedStyleOption.getAttribute("data-price")) || 0;
+
+  // Get selected design style and price
+  var designRadio = document.querySelector('input[name="design"]:checked');
+  var designLabel = "";
+  var designPrice = 0;
+  var designFileName = "";
+  if (designRadio) {
+    designLabel = designRadio.parentElement.textContent.trim();
+    designPrice = parseFloat(designRadio.getAttribute("data-price")) || 0;
+    // Show file name if upload is selected
+    if (designRadio.value === "upload") {
+      var uploadInput = document.getElementById("designUpload");
+      if (uploadInput && uploadInput.files.length > 0) {
+        designFileName = uploadInput.files[0].name;
+        designLabel += " (Uploaded: ${designFileName})";
+      }
+    }
+  }
+
+  // Calculate subtotal (style + design) * quantity
+  var perShirt = stylePrice + designPrice;
+  var subtotal = perShirt * quantity;
+
+  // Calculate tax (e.g., 1.25%)
+  var taxRate = 0.0125;
+  var tax = subtotal * taxRate;
 
   // Calculate total
-  var total = calculateTotal(checkboxes, radios[0], quantity);
+  var total = subtotal + tax;
 
-  // Calculate shirt cost (shirt price * quantity)
-  var shirtCost = stylePrice * quantity;
+  // Get credit card info
+  var cardNumber = document.getElementById("cardNumber").value.trim();
+  var cardExpiry = document.getElementById("cardExpiry").value.trim();
+  var cardCVC = document.getElementById("cardCVC").value.trim();
+
+  // Validate credit card info (basic example)
+  if (!cardNumber || !cardExpiry || !cardCVC) {
+    alert("Please enter your credit card information.");
+    return;
+  }
 
   // Order summary
   var summary = `
-    <h2>Order Summary</h2>
-    <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phone}</p>
-    <p><strong>Shirt Style:</strong> ${styleName}</p>
-    <p><strong>Quantity:</strong> ${quantity}</p>
-    <p><strong>Size:</strong> ${sizeLabel}</p>
-    <p><strong>Print Colors:</strong> ${printColors}</p>
-    <p><strong>Total Price:</strong> $${shirtCost.toFixed(2)}</p>
+    <h2>Order Summary</h2> 
+    <p>Name: ${firstName} ${lastName}</p> 
+    <p>Email: ${email}</p> 
+    <p>Phone: ${phone}</p> 
+    <p>Shirt Style: $${stylePrice.toFixed(2)}</p> 
+    <p>Design Style: $${designPrice.toFixed(2)}</p> 
+    <p>Quantity: ${quantity}</p> 
+    <p>Subtotal: $${subtotal.toFixed(2)}</p> 
+    <p>Tax (1.25%): $${tax.toFixed(2)}</p> 
+    <p>Total Price: $${total.toFixed(2)}</p> 
+    <p><strong>Card Number:</strong> **** **** **** ${cardNumber.slice(-4)}</p>
+    <p><strong>Expiry:</strong> ${cardExpiry}</p>
     <button id="checkoutButton" type="button">Checkout</button>
-  `;
+    <button id="resetButton" type="button">Reset</button>`;
   cartSection.innerHTML = summary;
 
-  // Show popup when checkout button is clicked
+  // Show alert when checkout button is clicked
   var checkoutBtn = document.getElementById("checkoutButton");
   if (checkoutBtn) {
     checkoutBtn.addEventListener("click", function () {
       alert("Thank you for your order! Your checkout is being processed.");
     });
   }
+
+  var resetBtn = document.getElementById("resetButton");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", resetOrder);
+  }
 }
 
 // Function, Try/Catch
 function resetOrder() {
-  try {
-    // Reset all forms by their IDs
-    document.getElementById("contactForm").reset();
-    document.getElementById("orderForm").reset();
-    document.getElementById("extrasForm").reset();
-    document.getElementById("colorForm").reset();
+  // Reset all forms
+  document.getElementById("contactForm").reset();
+  document.getElementById("orderForm").reset();
+  document.getElementById("colorForm").reset();
+  document.getElementById("extrasForm").reset();
+  document.getElementById("designForm").reset();
+  document.getElementById("creditCardForm").reset();
 
-    // Clear the cart summary
-    cartSection.innerHTML = "";
-  } catch (err) {
-    alert("Could not reset the order summary.");
-  }
+  // Restore the cart section to its original state
+  cartSection.innerHTML = `
+    <h2>Your Cart</h2>
+    <p id="emptyCartMessage" class="cart-empty-message">
+      Your cart is currently empty.
+    </p>
+    <button type="submit" id="submitButton">Submit</button>
+    <button type="reset" id="resetButton">Reset</button>
+  `;
+
+  // Re-attach event listeners to the new buttons
+  document
+    .getElementById("submitButton")
+    .addEventListener("click", handleOrder);
+  document.getElementById("resetButton").addEventListener("click", resetOrder);
 }
