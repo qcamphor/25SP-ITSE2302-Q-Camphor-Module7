@@ -6,7 +6,7 @@
     <!-- Title -->
     <title>Your Text Here</title>
 
-    <!-- Fonts -->
+    <!-- Fonts/styles -->
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -54,6 +54,7 @@
     </header>
 
     <main>
+      <!-- Intro-banner -->
       <div id="intro-banner" class="intro-banner">
         <h1 id="banner-h1">Create custom designs</h1>
         <img
@@ -63,25 +64,26 @@
           height="170" />
 
         <div class="intro-banner-text">
-          <h2>TSTC Campus Styles</h2>
+          <h2>Your Unique Styles</h2>
           <p>Browse and create custom prints online.</p>
-          <p>Show your campus pride or display your unique style.</p>
+          <p>Show your personality and display your unique style.</p>
         </div>
 
         <div class="intro-banner-text">
           <h2>Custom Styles</h2>
-          <p>All styles are available to both the student and staff.</p>
+          <p>All styles are available for everyone to express themselves.</p>
           <p>Keep custom designs appropriate and respectful.</p>
         </div>
         <a href="custom.html" class="design-btn">Start Designing</a>
       </div>
 
-      <!-- Product Images -->
-
+      <!-- Banner image -->
       <img
         class="banner-img"
         src="images/bannerImg.png"
-        alt="Images of T shirts" />
+        alt="Images of T shirts"
+        width="1200"
+        height="409" />
 
       <!-- Order form -->
       <section class="order-section">
@@ -93,6 +95,18 @@
 
             <label for="lastName">Last Name:</label>
             <input type="text" id="lastName" name="lastName" required />
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required />
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required />
+
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required />
+
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" name="zip" required />
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required />
@@ -199,30 +213,113 @@
               required />
           </form>
         </div>
-        <div class="order-section-buttons">
-          <button type="button" id="submitButton">Submit</button>
-          <button type="reset" id="resetButton">Reset</button>
-        </div>
       </section>
+
+      <section>
+        <!-- Design -->
+        <form id="designForm" class="order-form-box">
+          <p>Choose a design:</p>
+          <label>
+            <input
+              type="radio"
+              name="design"
+              value="designOne"
+              data-price="10"
+              required />
+            <img
+              src="images/designPic_1.jpg"
+              alt="Design 1"
+              width="80"
+              height="80" />
+            Design one ($10)
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="design"
+              value="designTwo"
+              data-price="10"
+              required />
+            <img
+              src="images/designPic_2.jpg"
+              alt="Design 2"
+              width="80"
+              height="80" />
+            Design two ($10)
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="design"
+              value="designThree"
+              data-price="10"
+              required />
+            <img
+              src="images/designPic_3.jpg"
+              alt="Design 3"
+              width="80"
+              height="80" />
+            Design three ($10)
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="design"
+              value="designFour"
+              data-price="10"
+              required />
+            <img
+              src="images/designPic_4.jpg"
+              alt="Design 3"
+              width="80"
+              height="80" />
+            Design four($10)
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="design"
+              value="upload"
+              data-price="20"
+              id="uploadRadio" />
+            <input
+              type="file"
+              id="designUpload"
+              name="designUpload"
+              accept="image/*" />
+            Upload Your Own Design ($20)
+          </label>
+        </form>
+      </section>
+
+      <!-- Credit Card Information -->
+      <section id="creditCard" class="credit-card-section">
+        <h2>Credit Card Information</h2>
+        <form id="creditCardForm">
+          <label for="cardNumber">Card Number:</label>
+          <input type="text" id="cardNumber" name="cardNumber" required />
+
+          <label for="cardExpiry">Expiry Date:</label>
+          <input
+            type="text"
+            id="cardExpiry"
+            name="cardExpiry"
+            placeholder="MM/YY"
+            required />
+
+          <label for="cardCVC">CVC:</label>
+          <input type="text" id="cardCVC" name="cardCVC" required />
+        </form>
+      </section>
+
       <!-- Cart Section -->
       <section id="cart" class="cart-section">
         <h2>Your Cart</h2>
-        <table id="cartTable">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="cartItems"></tbody>
-        </table>
-        <p id="cartTotal" class="cart-total">Total: $0</p>
-        <button type="button" id="checkoutButton" class="checkout-btn">
-          Checkout
-        </button>
+        <p id="emptyCartMessage" class="cart-empty-message">
+          Your cart is currently empty.
+        </p>
+        <button type="submit" id="submitButton">Submit</button>
+        <button type="reset" id="resetButton">Reset</button>
       </section>
 
       <!-- Testimonials Section -->
@@ -265,12 +362,12 @@
       <section class="about-us">
         <h2>The Team</h2>
         <p>
-          “Your Text Here is the leading provider of high-quality t-shirts at
-          TSTC. Our goal is to help our students and staff express their unique
-          style through custom apparel. We offer a wide range of designs,
-          colors, and sizes to suit every taste and preference. Our team is
-          dedicated to providing exceptional customer service and ensuring that
-          you find the perfect t-shirt for any occasion."
+          “Your Text Here is the leading provider of high-quality t-shirts in
+          Waco, TX. Our goal is to help our community express their unique style
+          through custom apparel. We offer a wide range of designs, colors, and
+          sizes to suit every taste and preference. Our team is dedicated to
+          providing exceptional customer service and ensuring that you find the
+          perfect t-shirt for any occasion."
         </p>
       </section>
     </main>
